@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import type { Section } from "@/types/section";
-import { Bell, Search, Calendar, Plus, CloudUpload, AlertTriangle, Clock } from "lucide-react";
+import { Bell, Search, Calendar, Plus } from "lucide-react";
 import { useState } from "react";
 
 interface HeaderProps {
@@ -42,12 +42,6 @@ export function Header({ activeSection }: HeaderProps) {
             <span>Create Invoice</span>
           </button>
         )}
-        {activeSection === "pipeline" && (
-          <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-accent text-accent-foreground text-sm font-medium hover:bg-accent/90 transition-colors duration-200">
-            <CloudUpload className="w-4 h-4" />
-            <span>Upload Documents</span>
-          </button>
-        )}
         {/* Search */}
         <div
           className={cn(
@@ -73,7 +67,7 @@ export function Header({ activeSection }: HeaderProps) {
 
         {/* User avatar */}
         <button className="w-9 h-9 rounded-lg overflow-hidden bg-secondary ring-2 ring-transparent hover:ring-accent/50 transition-all duration-200">
-          <div className="w-full h-full bg-gradient-to-br from-accent/80 to-chart-1 flex items-center justify-center text-xs font-semibold text-accent-foreground">
+          <div className="w-full h-full bg-linear-to-br from-accent/80 to-chart-1 flex items-center justify-center text-xs font-semibold text-accent-foreground">
             JD
           </div>
         </button>
