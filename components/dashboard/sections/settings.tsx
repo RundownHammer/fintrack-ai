@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTheme } from "next-themes";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -74,6 +75,7 @@ export function SettingsSection() {
   const [activeTab, setActiveTab] = useState("profile");
   const [aiPreferences, setAiPreferences] = useState(aiPreferenceSettings);
   const [isSaving, setIsSaving] = useState(false);
+  const { resolvedTheme, setTheme } = useTheme();
 
   const handleSave = () => {
     setIsSaving(true);
@@ -269,7 +271,11 @@ export function SettingsSection() {
                     <p className="text-sm text-muted-foreground">Use dark theme for the interface</p>
                   </div>
                 </div>
-                <Switch defaultChecked />
+                <Switch
+                  checked={resolvedTheme === "dark"}
+                  onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
+                  aria-label="Toggle dark mode"
+                />
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">

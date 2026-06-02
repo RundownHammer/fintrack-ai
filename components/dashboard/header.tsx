@@ -1,33 +1,21 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import type { Section } from "@/types/section";
 import { Bell, Search, Calendar, Plus } from "lucide-react";
 import { useState } from "react";
 
 interface HeaderProps {
-  activeSection: Section;
+  title: string;
 }
 
-const sectionTitles: Record<Section, string> = {
-  overview: "Overview",
-  pipeline: "AI Processing",
-  deals: "Invoices",
-  customers: "Client Directory",
-  team: "Vendors",
-  reports: "Reports",
-  forecasting: "Forecasting",
-  settings: "Settings",
-};
-
-export function Header({ activeSection }: HeaderProps) {
+export function Header({ title }: HeaderProps) {
   const [searchFocused, setSearchFocused] = useState(false);
 
   return (
     <header className="h-16 border-b border-border bg-background/80 backdrop-blur-sm sticky top-0 z-30 flex items-center justify-between px-6">
       <div className="flex items-center gap-6">
         <h1 className="text-xl font-semibold text-foreground">
-          {sectionTitles[activeSection]}
+          {title}
         </h1>
         <div className="hidden md:flex items-center gap-2 text-sm text-muted-foreground">
           <Calendar className="w-4 h-4" />
@@ -36,7 +24,7 @@ export function Header({ activeSection }: HeaderProps) {
       </div>
 
       <div className="flex items-center gap-4">
-        {activeSection === "deals" && (
+        {title === "Invoices" && (
           <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-accent text-accent-foreground text-sm font-medium hover:bg-accent/90 transition-colors duration-200">
             <Plus className="w-4 h-4" />
             <span>Create Invoice</span>

@@ -1,10 +1,10 @@
 "use client";
 
-import React from "react";
-import LucideCircleDollarSignIcon from "lucide-react"; // Import the missing icon component
+import type { ComponentType } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
-import type { Section } from "@/types/section";
 import {
   LayoutDashboard,
   GitBranch,
@@ -20,29 +20,30 @@ import {
 } from "lucide-react";
 
 interface SidebarProps {
-  activeSection: Section;
-  onSectionChange: (section: Section) => void;
   collapsed: boolean;
   onCollapsedChange: (collapsed: boolean) => void;
 }
 
-const navItems: { id: Section; label: string; icon: React.ElementType }[] = [
-  { id: "overview", label: "Overview", icon: LayoutDashboard },
-  { id: "pipeline", label: "AI Processing", icon: GitBranch },
-  { id: "deals", label: "Invoices", icon: Handshake },
-  { id: "customers", label: "Client Directory", icon: Building2 },
-  { id: "team", label: "Vendors", icon: Users },
-  { id: "forecasting", label: "Forecasting", icon: TrendingUp },
-  { id: "reports", label: "Reports", icon: BarChart3 },
-  { id: "settings", label: "Settings", icon: Settings },
+const navItems: Array<{
+  href: string;
+  label: string;
+  icon: ComponentType<{ className?: string }>;
+}> = [
+  { href: "/overview", label: "Overview", icon: LayoutDashboard },
+  { href: "/ai-processing", label: "AI Processing", icon: GitBranch },
+  { href: "/invoices", label: "Invoices", icon: Handshake },
+  { href: "/clients", label: "Client Directory", icon: Building2 },
+  { href: "/vendors", label: "Vendors", icon: Users },
+  { href: "/reports", label: "Reports", icon: BarChart3 },
+  { href: "/settings", label: "Settings", icon: Settings },
 ];
 
 export function Sidebar({
-  activeSection,
-  onSectionChange,
   collapsed,
   onCollapsedChange,
 }: SidebarProps) {
+  const pathname = usePathname();
+
   return (
     <aside
       className={cn(
@@ -71,12 +72,12 @@ export function Sidebar({
       <nav className="flex-1 px-3 py-4 space-y-1 overflow-hidden">
         {navItems.map((item) => {
           const Icon = item.icon;
-          const isActive = activeSection === item.id;
+          const isActive = pathname === item.href;
 
           return (
-            <button
-              key={item.id}
-              onClick={() => onSectionChange(item.id)}
+            <Link
+              key={item.href}
+              href={item.href}
               className={cn(
                 "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 group relative",
                 isActive
@@ -105,7 +106,7 @@ export function Sidebar({
               >
                 {item.label}
               </span>
-            </button>
+            </Link>
           );
         })}
       </nav>
