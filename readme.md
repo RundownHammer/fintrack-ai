@@ -1,4 +1,5 @@
-# FinTrack AI
+# [FinTrack AI](https://fintrack-ai-ebon.vercel.app/)
+[See Here](https://fintrack-ai-ebon.vercel.app/)
 
 > ⚠️ **Project Status: In Development** > *Note: Currently, only the AI processing window is functional. The rest of the platform is actively being built.*
 
